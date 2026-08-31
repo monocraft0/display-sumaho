@@ -25,7 +25,7 @@ app.innerHTML = `
         <label class="field">
           文字の大きさ
           <div class="range-with-value">
-            <input type="range" id="sizeInput" min="20" max="200" step="1" value="${DEFAULT_SIZE}" />
+            <input type="range" id="sizeInput" min="20" max="600" step="5" value="${DEFAULT_SIZE}" />
             <span id="sizeValue">${DEFAULT_SIZE}px</span>
           </div>
         </label>
