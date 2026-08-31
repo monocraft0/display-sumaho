@@ -117,6 +117,8 @@ body {
 #previewText {
   white-space: nowrap;
   font-weight: 700;
+  font-family: "DotGothic16", monospace;
+  letter-spacing: 0.15em;
 }
 
 #showButton {
@@ -175,6 +177,8 @@ body {
   left: 0;
   white-space: nowrap;
   font-weight: 700;
+  font-family: "DotGothic16", monospace;
+  letter-spacing: 0.2em;
   will-change: transform;
 }
 

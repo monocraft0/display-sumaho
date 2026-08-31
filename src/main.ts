@@ -66,10 +66,16 @@ messageInput.value = DEFAULT_TEXT;
 
 let currentAnimation: Animation | null = null;
 
+function ledGlow(color: string): string {
+  return `0 0 4px ${color}, 0 0 12px ${color}`;
+}
+
 function updatePreview(): void {
   const text = messageInput.value.trim() || DEFAULT_TEXT;
+  const color = colorInput.value;
   previewText.textContent = text;
-  previewText.style.color = colorInput.value;
+  previewText.style.color = color;
+  previewText.style.textShadow = ledGlow(color);
   previewText.style.fontSize = `${Math.min(Number(sizeInput.value), 40)}px`;
 }
 
@@ -94,6 +100,7 @@ function startMarquee(): void {
 
   marqueeText.textContent = text;
   marqueeText.style.color = color;
+  marqueeText.style.textShadow = ledGlow(color);
   marqueeText.style.fontSize = `${size}px`;
 
   currentAnimation?.cancel();
