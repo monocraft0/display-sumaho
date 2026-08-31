@@ -2,7 +2,7 @@ import "./style.css";
 
 const DEFAULT_TEXT = "ようこそ";
 const DEFAULT_COLOR = "#ffffff";
-const DEFAULT_SIZE = 80; // px
+const DEFAULT_SIZE = 440; // px
 const SPEED_PX_PER_SEC = 220;
 
 const app = document.querySelector<HTMLDivElement>("#app")!;
