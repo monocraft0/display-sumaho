@@ -100,9 +100,9 @@ function startMarquee(): void {
 
   const textWidth = marqueeText.offsetWidth;
   const viewportWidth = window.innerWidth;
-  const startX = viewportWidth;
-  const endX = -textWidth;
-  const distance = startX - endX;
+  const startX = -textWidth;
+  const endX = viewportWidth;
+  const distance = endX - startX;
   const durationMs = (distance / SPEED_PX_PER_SEC) * 1000;
 
   currentAnimation = marqueeText.animate(
