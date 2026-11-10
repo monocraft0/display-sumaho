@@ -73,8 +73,15 @@ body {
   gap: 16px;
 }
 
-.field-row .field {
+.field-row > .field,
+.field-row > .field-column {
   flex: 1;
+}
+
+.field-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 #colorInput {
@@ -92,11 +99,13 @@ body {
   gap: 10px;
 }
 
-#sizeInput {
+#sizeInput,
+#speedInput {
   flex: 1;
 }
 
-#sizeValue {
+#sizeValue,
+#speedValue {
   min-width: 52px;
   text-align: right;
   color: #fff;

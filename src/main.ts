@@ -3,7 +3,7 @@ import "./style.css";
 const DEFAULT_TEXT = "ようこそ";
 const DEFAULT_COLOR = "#ffffff";
 const DEFAULT_SIZE = 440; // px
-const SPEED_PX_PER_SEC = 220;
+const DEFAULT_SPEED = 220; // px/秒
 
 const app = document.querySelector<HTMLDivElement>("#app")!;
 
@@ -22,13 +22,22 @@ app.innerHTML = `
           文字の色
           <input type="color" id="colorInput" value="${DEFAULT_COLOR}" />
         </label>
-        <label class="field">
-          文字の大きさ
-          <div class="range-with-value">
-            <input type="range" id="sizeInput" min="20" max="600" step="5" value="${DEFAULT_SIZE}" />
-            <span id="sizeValue">${DEFAULT_SIZE}px</span>
-          </div>
-        </label>
+        <div class="field-column">
+          <label class="field">
+            文字の大きさ
+            <div class="range-with-value">
+              <input type="range" id="sizeInput" min="20" max="600" step="5" value="${DEFAULT_SIZE}" />
+              <span id="sizeValue">${DEFAULT_SIZE}px</span>
+            </div>
+          </label>
+          <label class="field">
+            文字の速さ
+            <div class="range-with-value">
+              <input type="range" id="speedInput" min="20" max="1000" step="10" value="${DEFAULT_SPEED}" />
+              <span id="speedValue">${DEFAULT_SPEED}</span>
+            </div>
+          </label>
+        </div>
       </div>
 
       <div class="field">
@@ -57,6 +66,8 @@ const messageInput = document.querySelector<HTMLTextAreaElement>("#messageInput"
 const colorInput = document.querySelector<HTMLInputElement>("#colorInput")!;
 const sizeInput = document.querySelector<HTMLInputElement>("#sizeInput")!;
 const sizeValue = document.querySelector<HTMLSpanElement>("#sizeValue")!;
+const speedInput = document.querySelector<HTMLInputElement>("#speedInput")!;
+const speedValue = document.querySelector<HTMLSpanElement>("#speedValue")!;
 const previewText = document.querySelector<HTMLSpanElement>("#previewText")!;
 const showButton = document.querySelector<HTMLButtonElement>("#showButton")!;
 const closeButton = document.querySelector<HTMLButtonElement>("#closeButton")!;
@@ -83,7 +94,12 @@ function updateSizeLabel(): void {
   sizeValue.textContent = `${sizeInput.value}px`;
 }
 
+function updateSpeedLabel(): void {
+  speedValue.textContent = speedInput.value;
+}
+
 messageInput.addEventListener("input", updatePreview);
+speedInput.addEventListener("input", updateSpeedLabel);
 colorInput.addEventListener("input", updatePreview);
 sizeInput.addEventListener("input", () => {
   updateSizeLabel();
@@ -91,12 +107,14 @@ sizeInput.addEventListener("input", () => {
 });
 
 updateSizeLabel();
+updateSpeedLabel();
 updatePreview();
 
 function startMarquee(): void {
   const text = messageInput.value.trim() || DEFAULT_TEXT;
   const color = colorInput.value;
   const size = Number(sizeInput.value);
+  const speed = Number(speedInput.value);
 
   marqueeText.textContent = text;
   marqueeText.style.color = color;
@@ -110,7 +128,7 @@ function startMarquee(): void {
   const startX = viewportWidth;
   const endX = -textWidth;
   const distance = startX - endX;
-  const durationMs = (distance / SPEED_PX_PER_SEC) * 1000;
+  const durationMs = (distance / speed) * 1000;
 
   currentAnimation = marqueeText.animate(
     [
